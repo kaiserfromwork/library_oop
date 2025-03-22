@@ -6,7 +6,7 @@ class Library():
     def __init__(self):  # Constructor
         self.list_of_users = []
         self.list_of_books = []
-
+    
     
     def add_book(self, book):
         """Adds book to library catalog
@@ -100,3 +100,6 @@ class Library():
         
         for book in self.list_of_books:
             return book if book.title == book_title and book.author == book_author else None
+
+    def borrow_book(self, book_title, user_name):
+        pass
