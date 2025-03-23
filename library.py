@@ -1,10 +1,10 @@
 # Library 
 from book import Book
-
+from user_database import UserDatabase
 class Library():
 
     def __init__(self):  # Constructor
-        self.list_of_users = []
+        self.list_of_users = UserDatabase()
         self.list_of_books = []
     
     

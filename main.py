@@ -1,6 +1,7 @@
 from library import Library
 from user import User
 from book import Book
+from user_database import UserDatabase
 
 # Library
 library = Library()
@@ -17,3 +18,10 @@ library.add_book(book_01)
 
 for x in library.display_books():
     print(x.title, x.author)
+
+
+# db_user = UserDatabase()
+# db_user.save_user_info(lucas)
+
+user_database = library.list_of_users
+print(user_database)

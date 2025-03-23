@@ -5,7 +5,7 @@ import hashlib
 
 # Class Import
 from book import Book
-from OOP.Library_OOP.user_database import UserDatabase
+from user_database import UserDatabase
 
 class User():
     def __init__(self, name, surname):
@@ -15,7 +15,10 @@ class User():
         self.borrowed_books = []
 
         if self._id:
-            UserDatabase.save_data()
+            user_info = {
+            self._id : [self.name, self.surname, self.borrowed_books]
+            }
+            UserDatabase.save_user_info(user_info)
         else:
             print(f"{self.name} was not added to database successfully!")
 
@@ -23,6 +26,7 @@ class User():
 
     def user_id(self, name, surname) -> str:
         unique_id = f"{name}{surname}{time.time()}"
+        print("ID created!")
         return hashlib.sha256(unique_id.encode()).hexdigest()
 
 
