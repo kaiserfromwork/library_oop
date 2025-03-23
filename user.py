@@ -14,7 +14,7 @@ class User():
         self._id = self.user_id(name, surname)
         self.borrowed_books = []
 
-        if self._id:
+        if self._id: 
             user_info = {
             self._id : [self.name, self.surname, self.borrowed_books]
             }
@@ -25,7 +25,8 @@ class User():
 
 
     def user_id(self, name, surname) -> str:
-        unique_id = f"{name}{surname}{time.time()}"
+        # unique_id = f"{name}{surname}{time.time()}"
+        unique_id = f"{name}{surname}"
         print("ID created!")
         return hashlib.sha256(unique_id.encode()).hexdigest()
 
