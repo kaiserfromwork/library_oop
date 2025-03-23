@@ -1,5 +1,6 @@
 # Library 
 from book import Book
+from user import User
 from user_database import UserDatabase
 class Library():
 
@@ -27,7 +28,7 @@ class Library():
         return True
     
 
-    def remove_book(self, book):
+    def remove_book(self, book: Book):
         """Removes book from list of books owned by Library
         
         Keyword arguments:
@@ -50,6 +51,18 @@ class Library():
         else:
             print(f"Not a instance of Book() class")
             return False    
+        
+
+     # adds user to library list of users   
+    def add_user(self, user: User):
+        if isinstance(user, User):
+            self.list_of_users.append(user)
+            print(f"{user.name} added to library!")
+            return True
+        else:
+            print("Not a valid user!")
+            return False
+
 
     def display_users(self):
         """List users of the library
