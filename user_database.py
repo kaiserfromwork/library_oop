@@ -3,7 +3,8 @@
 # module imports
 import json
 
-FILENAME = "user_database.txt"
+# FILENAME = "user_database.txt"
+FILENAME = "user_database.json"
 
 class UserDatabase():
 
@@ -19,8 +20,9 @@ class UserDatabase():
         my_list = []
         try:
             with open(FILENAME, "r") as file:
+                # return json.load(file)
                 for line in file:
-                    my_list.append(json.loads(line.strip()))
+                    my_list.append(json.loads(line))
             return my_list
         except (FileNotFoundError, json.JSONDecodeError) as error:
             print(f"Error loading user info from database: {error}")
@@ -32,7 +34,8 @@ class UserDatabase():
         try:
             with open(FILENAME, "a") as file:
                 # writing to text file, dumps() turn dict into json string + \n for better reading in load_user_database()
-                file.write(json.dumps(user_info) + "\n") 
+                file.write(json.dumps(user_info) + "\n")
+                # json.dump(user_info + "\n", file)
 
             return True
             

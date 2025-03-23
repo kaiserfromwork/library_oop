@@ -25,3 +25,5 @@ for x in library.display_books():
 
 user_database = library.list_of_users
 print(f"Printing Database: \n {user_database}")
+print("")
+print(user_database.user_database_info[0])
