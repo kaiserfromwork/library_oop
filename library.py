@@ -2,6 +2,7 @@
 from book import Book
 from user import User
 from user_database import UserDatabase
+from hash_dict import HashDict
 class Library():
 
     def __init__(self):  # Constructor
@@ -83,7 +84,7 @@ class Library():
         return self.list_of_books
     
     
-    def find_user(self, user: User):
+    def find_user(self, name, surname):
         """Find user based on name and surname
         
         Keyword arguments:
@@ -94,11 +95,12 @@ class Library():
             Returns user if in list of users, otherwise returns None
         """
         database = self.list_of_users
-        print("TEst")
-        print(database.user_database_info[0].get("e0bf19183245d1bf957f345f05a0a99e4478a4b1d9e3f66147119410d913d111"))
-        # for user in self.list_of_users:
-        #     if user.name == name and user.surname == surname:
-        #         return user
+        user_id = HashDict.hash_dict(name, surname)
+        user = database.user_database_info[0].get(user_id)
+        if user:
+            print("User Found!")
+            return user    
+        print("User does not exit")
         return None
     
     

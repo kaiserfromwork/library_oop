@@ -8,16 +8,17 @@ library = Library()
 
 # User
 lucas = User("Lucas", "de Oliveira")
+elric = User("Edward", "Elric")
 
 # Book
 book_01 = Book("1984", "George Orwell")
 
 ###################################################### - TEST - ######################################################
-library.add_book(book_01)
+# library.add_book(book_01)
 
 
-for x in library.display_books():
-    print(x.title, x.author)
+# for x in library.display_books():
+#     print(x.title, x.author)
 
 
 # db_user = UserDatabase()
@@ -33,4 +34,8 @@ print(f"Printing Database: \n {user_database}")
 # user_test = user_database.user_database_info[0].get("e0bf19183245d1bf957f345f05a0a99e4478a4b1d9e3f66147119410d913d111")
 # print(user_test[0])
 
-library.find_user(lucas)
+name, surname, books = library.find_user(lucas.name, lucas.surname)
+
+print(name)
+print(surname)
+print(books)

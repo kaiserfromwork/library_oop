@@ -23,8 +23,8 @@ class User():
 
 
 
-    def user_id(self, name, surname) -> str:
-        return HashDict(name, surname)
+    def user_id(self, name, surname):
+        return HashDict.hash_dict(name, surname)
 
 
     def __str__(self):
