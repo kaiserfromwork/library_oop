@@ -30,6 +30,6 @@ print(user_database.user_database_info[0])
 print(type(user_database.user_database_info[0]))
 print("TEST")
 print(user_database.user_database_info[0].get("e0bf19183245d1bf957f345f05a0a99e4478a4b1d9e3f66147119410d913d111"))
-
-testing_id = "e0bf19183245d1bf957f345f05a0a99e4478a4b1d9e3f66147119410d913d111"
+user_test = user_database.user_database_info[0].get("e0bf19183245d1bf957f345f05a0a99e4478a4b1d9e3f66147119410d913d111")
+print(user_test[0])
 
