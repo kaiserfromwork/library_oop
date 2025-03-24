@@ -1,12 +1,11 @@
 # User - class representing user entity
 # Module Import
 import time
-import hashlib
 
 # Class Import
 from book import Book
 from user_database import UserDatabase
-
+from hash_dict import HashDict
 class User():
     def __init__(self, name, surname):
         self.name = name
@@ -25,10 +24,7 @@ class User():
 
 
     def user_id(self, name, surname) -> str:
-        # unique_id = f"{name}{surname}{time.time()}"
-        unique_id = f"{name}{surname}"
-        print("ID created!")
-        return hashlib.sha256(unique_id.encode()).hexdigest()
+        return HashDict(name, surname)
 
 
     def __str__(self):

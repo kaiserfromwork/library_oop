@@ -21,4 +21,4 @@ SOLUTION:
 -  for line in file:
                     my_list.append(json.loads(line.strip()))
 
-    - When reading, reading one line at a time
+    - When reading, read line at a time

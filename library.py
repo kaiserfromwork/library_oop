@@ -83,7 +83,7 @@ class Library():
         return self.list_of_books
     
     
-    def find_user(self, name, surname):
+    def find_user(self, user: User):
         """Find user based on name and surname
         
         Keyword arguments:
@@ -93,10 +93,12 @@ class Library():
         Return:
             Returns user if in list of users, otherwise returns None
         """
-        
-        for user in self.list_of_users:
-            if user.name == name and user.surname == surname:
-                return user
+        database = self.list_of_users
+        print("TEst")
+        print(database.user_database_info[0].get("e0bf19183245d1bf957f345f05a0a99e4478a4b1d9e3f66147119410d913d111"))
+        # for user in self.list_of_users:
+        #     if user.name == name and user.surname == surname:
+        #         return user
         return None
     
     
