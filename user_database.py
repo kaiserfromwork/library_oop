@@ -34,6 +34,15 @@ class UserDatabase():
             return {}
         
     def update_user_database(self, user_database):
+        """Updates user database
+        
+        Keyword arguments:
+            user_database (list) -- user database
+        
+        Return: 
+            Return true if file written successfully and false otherwise
+        """
+        
         if user_database:
             try:
                 with open(FILENAME, "w") as file:
