@@ -13,7 +13,7 @@ class User():
         self._id = self.user_id(name, surname)
         self.borrowed_books = []
 
-
+    # use this func to get protected self._id of the user
     def get_user_id(self):
         return str(self._id)
     
