@@ -13,19 +13,14 @@ class User():
         self._id = self.user_id(name, surname)
         self.borrowed_books = []
 
-        if self._id: 
-            user_info = {
-            self._id : [self.name, self.surname, self.borrowed_books]
-            }
-            UserDatabase.save_user_info(user_info)
-        else:
-            print(f"{self.name} was not added to database successfully!")
 
-
+    def get_user_id(self):
+        return str(self._id)
+    
 
     def user_id(self, name, surname):
         return HashDict.hash_dict(name, surname)
 
 
     def __str__(self):
-        return f"{self.name, self.surname}"
+        return f"{self.name, self.surname, self.borrowed_books}"

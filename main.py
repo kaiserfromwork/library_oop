@@ -21,8 +21,9 @@ book_01 = Book("1984", "George Orwell")
 #     print(x.title, x.author)
 
 
-# db_user = UserDatabase()
-# db_user.save_user_info(lucas)
+db_user = UserDatabase()
+print(lucas)
+db_user.save_user_info(lucas)
 
 # user_database = library.list_of_users
 # print(f"Printing Database: \n {user_database}")
@@ -35,11 +36,11 @@ book_01 = Book("1984", "George Orwell")
 # print(user_test[0])
 
 # Getting user data using name and surname
-name, surname, books = library.find_user(lucas.name, lucas.surname)
+# name, surname, books = library.find_user(lucas.name, lucas.surname)
 
-print(name)
-print(surname)
-print(books)
+# print(name)
+# print(surname)
+# print(books)
 
 
-library.delete_user(name, surname)
+# library.delete_user(name, surname)

@@ -21,24 +21,26 @@ class UserDatabase():
         try:
             with open(FILENAME, "r") as file:
                 # return json.load(file)
-                for line in file:
-                    my_list.append(json.loads(line))
-            return my_list
+                for line in file:   
+                    return json.loads(line)
+                    # my_list.append(json.loads(line).strip())
+            # return my_list
         except (FileNotFoundError, json.JSONDecodeError) as error:
             print(f"Error loading user info from database: {error}")
             return {}
 
 
 
-    def save_user_info(user_info):
+    def save_user_info(self, user):
+        user_database = self.user_database_info # returning JSON from file as a dict
+        print(user_database)
+        id = user.get_user_id()
+        new_dict = {id: [user.name, user.surname, user.borrowed_books]}
+        user_database.append(new_dict)
+        # user_database[id] = "user"
         try:
-            with open(FILENAME, "a") as file:
-                # writing to text file, dumps() turn dict into json string + \n for better reading in load_user_database()
-                file.write(json.dumps(user_info) + "\n")
-                # json.dump(user_info + "\n", file)
-
-            return True
-            
+            with open(FILENAME, "w") as file:
+                json.dump(user_database, file)
         except (OSError, json.JSONDecodeError) as error:
             print(f"Error saving user to database: {error}")
             return False
