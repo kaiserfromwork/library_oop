@@ -1,8 +1,15 @@
 # Library 
+import json
+
+# classes  import
 from book import Book
 from user import User
 from user_database import UserDatabase
 from hash_dict import HashDict
+
+
+
+FILENAME = "user_database.json"
 class Library():
 
     def __init__(self):  # Constructor
@@ -52,26 +59,6 @@ class Library():
         else:
             print(f"Not a instance of Book() class")
             return False    
-        
-
-     # adds user to library list of users   
-    def add_user(self, user: User):
-        if isinstance(user, User):
-            self.list_of_users.append(user)
-            print(f"{user.name} added to library!")
-            return True
-        else:
-            print("Not a valid user!")
-            return False
-
-
-    def display_users(self):
-        """List users of the library
-        
-        Return: returns a list  
-        """
-        
-        return self.list_of_users
     
 
     def display_books(self):
@@ -82,26 +69,6 @@ class Library():
         """
         
         return self.list_of_books
-    
-    
-    def find_user(self, name, surname):
-        """Find user based on name and surname
-        
-        Keyword arguments:
-            name (str) -- first name of user
-            surname (str) -- last name of user
-        
-        Return:
-            Returns user if in list of users, otherwise returns None
-        """
-        database = self.list_of_users
-        user_id = HashDict.hash_dict(name, surname)
-        user = database.user_database_info[0].get(user_id)
-        if user:
-            print("User Found!")
-            return user    
-        print("User does not exit")
-        return None
     
     
     def find_book(self, book_title, book_author):
@@ -119,4 +86,60 @@ class Library():
             return book if book.title == book_title and book.author == book_author else None
 
     def borrow_book(self, book_title, user_name):
-        pass
+        pass   
+    
+    ######## USER ####################################################################################
+
+     # adds user to library list of users   
+    def add_user(self, user: User):
+        if isinstance(user, User):
+            self.list_of_users.append(user)
+            print(f"{user.name} added to library!")
+            return True
+        else:
+            print("Not a valid user!")
+            return False
+        
+    def find_user(self, name, surname):
+        """Find user based on name and surname
+        
+        Keyword arguments:
+            name (str) -- first name of user
+            surname (str) -- last name of user
+        
+        Return:
+            Returns user if in list of users, otherwise returns None
+        """
+        database = self.list_of_users
+        user_id = HashDict.hash_dict(name, surname)
+        user = database.user_database_info[0].get(user_id)
+
+        if user:
+            print("User Found!")
+            return user    
+        print("User does not exit")
+        return None
+
+
+    def display_users(self):
+        """List users of the library
+        
+        Return: returns a list  
+        """
+        
+        return self.list_of_users
+
+
+    def delete_user(self, name, surname):
+        user_id = HashDict.hash_dict(name, surname)
+        new_file = []
+        try:
+            with open(FILENAME, "r") as file:
+                for line in file:
+                    data = json.loads(line)
+                    if not data.get(user_id):
+                        new_file.append(data)
+            with open(FILENAME, "w") as file:
+                json.dump(new_file, file)
+        except(FileNotFoundError, json.JSONDecodeError) as error:
+            print(f"Error loading user info from database: {error}")
