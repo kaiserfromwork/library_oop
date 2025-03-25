@@ -32,6 +32,16 @@ class UserDatabase():
         except (FileNotFoundError, json.JSONDecodeError) as error:
             print(f"Error loading user info from database: {error}")
             return {}
+        
+    def update_user_database(self, user_database):
+        if user_database:
+            try:
+                with open(FILENAME, "w") as file:
+                    json.dump(user_database, file)
+                return True
+            except (OSError, json.JSONDecodeError) as error:
+                print("Error while updating database: {error}")
+                return False
 
 
 
@@ -51,6 +61,7 @@ class UserDatabase():
         # Creating dict to append to JSON file
         new_dict = {id: [user.name, user.surname, user.borrowed_books]}
         
+        # checking if JSON file is empty, if file is empty it creates a new list
         if user_database:
             user_database.append(new_dict)
         else:
@@ -64,3 +75,5 @@ class UserDatabase():
         except (OSError, json.JSONDecodeError) as error:
             print(f"Error saving user to database: {error}")
             return False
+        
+
