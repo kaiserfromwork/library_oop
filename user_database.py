@@ -9,7 +9,7 @@ FILENAME = "user_database.json"
 class UserDatabase():
 
     def __init__(self):
-        self.user_database_info = self.load_user_database()  # reading contents of JSON file
+        self.user_database_info = self.load_user_database()  # storing contents of JSON file
 
     
     def __str__(self):
@@ -45,7 +45,7 @@ class UserDatabase():
 
 
 
-    def save_user_info(self, user):
+    def save_user_to_database(self, user):
         """Saves information of user to database
         
         Keyword arguments:

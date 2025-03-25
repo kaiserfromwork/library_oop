@@ -10,7 +10,7 @@ class User():
     def __init__(self, name, surname):
         self.name = name
         self.surname = surname
-        self._id = self.user_id(name, surname)
+        self._id = self.create_user_id(name, surname)
         self.borrowed_books = []
 
     # use this func to get protected self._id of the user
@@ -18,7 +18,7 @@ class User():
         return str(self._id)
     
 
-    def user_id(self, name, surname):
+    def create_user_id(self, name, surname):
         return HashDict.hash_dict(name, surname)
 
 
