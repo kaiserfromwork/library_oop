@@ -9,7 +9,7 @@ FILENAME = "user_database.json"
 class UserDatabase():
 
     def __init__(self):
-        self.user_database_info = self.load_user_database()
+        self.user_database_info = self.load_user_database()  # reading contents of JSON file
 
     
     def __str__(self):
@@ -17,6 +17,13 @@ class UserDatabase():
 
 
     def load_user_database(self):
+        """Retrieves information from user database.
+        
+        Return: 
+            Returns information from JSON file if file exists, otherwise returns an empty dict
+
+        """
+        
         try:
             with open(FILENAME, "r") as file:
                 for line in file:   
@@ -35,6 +42,7 @@ class UserDatabase():
         user (obj) -- user object
         
         Return: 
+            return False if fails to write to file
         """
         
         user_database = self.user_database_info # returning JSON from file as a dict
@@ -42,7 +50,11 @@ class UserDatabase():
 
         # Creating dict to append to JSON file
         new_dict = {id: [user.name, user.surname, user.borrowed_books]}
-        user_database.append(new_dict)
+        
+        if user_database:
+            user_database.append(new_dict)
+        else:
+            user_database = [new_dict]
 
         # Writing to JSON file
         try:
