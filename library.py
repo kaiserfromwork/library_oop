@@ -17,7 +17,7 @@ class Library():
         self.list_of_books = []
     
     
-    def add_book(self, book):
+    def add_book(self, book: Book):
         """Adds book to library catalog
         
         Keyword arguments:

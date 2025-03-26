@@ -19,4 +19,5 @@ library.add_user(lucas)
 library.add_user(elric)
 
 print(library.find_user("Lucas", "de Oliveira"))
+# print(library.display_user_list)
 library.delete_user(lucas)
