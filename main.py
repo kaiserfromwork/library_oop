@@ -17,13 +17,5 @@ book_01 = Book("1984", "George Orwell")
 db_user = UserDatabase()
 db_user.save_user_to_database(lucas)
 
-# db_user.update_user_database(test)
-
-# name, surname, books = library.find_user(lucas.name, lucas.surname)
-
-# print(name)
-# print(surname)
-# print(books)
-
 
 # library.delete_user(lucas)

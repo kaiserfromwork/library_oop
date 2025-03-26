@@ -24,12 +24,10 @@ class UserDatabase():
 
         """
         
+        # Reading from JSON file
         try:
             with open(FILENAME, "r") as file:
                 return json.load(file)
-                # for line in file:   
-                #     print(line)  
-                #     return json.loads(line)
                 
         except (FileNotFoundError, json.JSONDecodeError) as error:
             print(f"Error loading user info from database: {error}")
@@ -45,15 +43,14 @@ class UserDatabase():
             Return true if file written successfully and false otherwise
         """
         
-        if user_database:
-            try:
-                with open(FILENAME, "w") as file:
-                    json.dump(user_database, file)
-                return True
-            except (OSError, json.JSONDecodeError) as error:
-                print("Error while updating database: {error}")
-                return False
-
+        # Writing to JSON file
+        try:
+            with open(FILENAME, "w") as file:
+                json.dump(user_database, file, indent=4)
+            return True
+        except (OSError, json.JSONDecodeError) as error:
+            print("Error while updating database: {error}")
+            return False
 
 
     def save_user_to_database(self, user):
@@ -66,21 +63,12 @@ class UserDatabase():
             return False if fails to write to file
         """
         
-        user_database = self.user_database_info # returning JSON from file as a dict
-        print(type(user_database))
-        print(user_database)
-        id = user.get_user_id() # getting user id user getter
-        print(type(id))
+        user_database = self.user_database_info # storing JSON from file as a dict
+        id = user.get_user_id() # getting user id 
 
-        # Creating dict to append to JSON file
-        new_dict = {id: [user.name, user.surname, user.borrowed_books]}
-        print(type(user.name))
-        # checking if JSON file is empty, if file is empty it creates a new list
-        # if user_database:
-        #     user_database.append(new_dict)
-        # else:
-        #     user_database = [new_dict]
-        user_database["id2"] =  {"name": user.name, "surname": user.surname, "books": user.borrowed_books}
+        # Adding user to dict data structure
+        user_database[id] =  {"name": user.name, "surname": user.surname, "books": user.borrowed_books}
+        
         # Writing to JSON file
         try:
             with open(FILENAME, "w") as file:
