@@ -110,37 +110,19 @@ class Library():
         database[id] = {"name": user.name, "surname": user.surname, "books": user.borrowed_books}
 
         print("User added to database!")
-        
+
         # Will return True if added, False Otherwise
         return UserDatabase.update_user_database(database)
 
+    
+    def find_user(self, name, surname):
+        database = self.list_of_users.user_database_info
+        id = HashDict.hash_dict(name, surname)
 
-
-    # def find_user(self, name, surname):
-    #     """Find user based on name and surname
-        
-    #     Keyword arguments:
-    #         name (str) -- first name of user
-    #         surname (str) -- last name of user
-        
-    #     Return:
-    #         Returns user if in list of users, otherwise returns None
-    #     """
-    #     database = self.list_of_users
-    #     user_id = HashDict.hash_dict(name, surname)
-    #     user = database.user_database_info[0].get(user_id)
-
-    #     if user:
-    #         print("User Found!")
-    #         return user    
-    #     print("User does not exit")
-    #     return None
-
-
-    def display_users(self):
-        """List users of the library
-        
-        Return: returns a list  
-        """
-        
-        return self.list_of_users
+        if id in database:
+            print(f"User: {name} {surname} found!")
+            return database[id]
+        else:
+            print(f"Could not find user with name: {name} and surname: {surname}")
+            return False
+    
