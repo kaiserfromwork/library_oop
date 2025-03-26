@@ -26,8 +26,10 @@ class UserDatabase():
         
         try:
             with open(FILENAME, "r") as file:
-                for line in file:   
-                    return json.loads(line)
+                return json.load(file)
+                # for line in file:   
+                #     print(line)  
+                #     return json.loads(line)
                 
         except (FileNotFoundError, json.JSONDecodeError) as error:
             print(f"Error loading user info from database: {error}")
@@ -65,21 +67,24 @@ class UserDatabase():
         """
         
         user_database = self.user_database_info # returning JSON from file as a dict
+        print(type(user_database))
+        print(user_database)
         id = user.get_user_id() # getting user id user getter
+        print(type(id))
 
         # Creating dict to append to JSON file
         new_dict = {id: [user.name, user.surname, user.borrowed_books]}
-        
+        print(type(user.name))
         # checking if JSON file is empty, if file is empty it creates a new list
-        if user_database:
-            user_database.append(new_dict)
-        else:
-            user_database = [new_dict]
-
+        # if user_database:
+        #     user_database.append(new_dict)
+        # else:
+        #     user_database = [new_dict]
+        user_database["id2"] =  {"name": user.name, "surname": user.surname, "books": user.borrowed_books}
         # Writing to JSON file
         try:
             with open(FILENAME, "w") as file:
-                json.dump(user_database, file)
+                json.dump(user_database, file, indent=4)
 
         except (OSError, json.JSONDecodeError) as error:
             print(f"Error saving user to database: {error}")

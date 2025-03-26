@@ -26,4 +26,4 @@ db_user.save_user_to_database(lucas)
 # print(books)
 
 
-# library.delete_user(name, surname)
+# library.delete_user(lucas)

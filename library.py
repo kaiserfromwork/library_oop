@@ -99,7 +99,18 @@ class Library():
         else:
             print("Not a valid user!")
             return False
-        
+    
+
+    # def delete_user(self, user):
+    #     database = self.list_of_users.user_database_info  # storing database as a list 
+    #     id = user.get_user_id()
+    #     print(id)
+    #     print(database[0])
+    #     # database.pop(user.get_user_id())
+
+        return True
+
+
     def find_user(self, name, surname):
         """Find user based on name and surname
         
@@ -130,16 +141,16 @@ class Library():
         return self.list_of_users
 
 
-    def delete_user(self, name, surname):
-        user_id = HashDict.hash_dict(name, surname)
-        new_file = []
-        try:
-            with open(FILENAME, "r") as file:
-                for line in file:
-                    data = json.loads(line)
-                    if not data.get(user_id):
-                        new_file.append(data)
-            with open(FILENAME, "w") as file:
-                json.dump(new_file, file)
-        except(FileNotFoundError, json.JSONDecodeError) as error:
-            print(f"Error loading user info from database: {error}")
+    # def delete_user(self, name, surname):
+    #     user_id = HashDict.hash_dict(name, surname)
+    #     new_file = []
+    #     try:
+    #         with open(FILENAME, "r") as file:
+    #             for line in file:
+    #                 data = json.loads(line)
+    #                 if not data.get(user_id):
+    #                     new_file.append(data)
+    #         with open(FILENAME, "w") as file:
+    #             json.dump(new_file, file)
+    #     except(FileNotFoundError, json.JSONDecodeError) as error:
+    #         print(f"Error loading user info from database: {error}")
