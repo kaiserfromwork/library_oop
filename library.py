@@ -1,10 +1,13 @@
 # Library 
 import json
 
+# Database import (JSON Files)
+from book_database import BookDatabase
+from user_database import UserDatabase
+
 # classes  import
 from book import Book
 from user import User
-from user_database import UserDatabase
 from hash_dict import HashDict
 
 
@@ -14,26 +17,16 @@ class Library():
 
     def __init__(self):  # Constructor
         self.list_of_users = UserDatabase()
-        self.list_of_books = []
+        self.list_of_books = BookDatabase()
     
     
     def add_book(self, book: Book):
-        """Adds book to library catalog
-        
-        Keyword arguments:
-            book -- Object of class Book()
-        Return: True if book is successfully added and False otherwise
+        database = self.list_of_books.book_database_info
+        id =  book.get_book_id()
 
-        """
-        
-        if isinstance(book, Book):  # Checks if book is instance of Book()
-            self.list_of_books.append(book)
-        else:
-            print("Object not of class Book()")
-            return False
-        
-        print(f"Book {book.title} added to the library!")
-        return True
+        database[id] = {"title": book.title, "author": book.author, "borrowed": book.borrowed}
+        BookDatabase.update_book_database(database)
+
     
 
     def remove_book(self, book: Book):
