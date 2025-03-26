@@ -16,6 +16,7 @@ book_01 = Book("1984", "George Orwell")
 ###################################################### - TEST - ######################################################
 db_user = UserDatabase()
 db_user.save_user_to_database(lucas)
+db_user.save_user_to_database(elric)
 
 
-# library.delete_user(lucas)
+library.delete_user(lucas)

@@ -89,37 +89,39 @@ class Library():
         pass   
     
     ######## USER ####################################################################################
-
-     # adds user to library list of users   
-    def add_user(self, user: User):
-        if isinstance(user, User):
-            self.list_of_users.append(user)
-            print(f"{user.name} added to library!")
-            return True
-        else:
-            print("Not a valid user!")
-            return False
     
+    def delete_user(self, user: User):
+        database = self.list_of_users.user_database_info # storing dict 
+        id = user.get_user_id()
 
-    def find_user(self, name, surname):
-        """Find user based on name and surname
-        
-        Keyword arguments:
-            name (str) -- first name of user
-            surname (str) -- last name of user
-        
-        Return:
-            Returns user if in list of users, otherwise returns None
-        """
-        database = self.list_of_users
-        user_id = HashDict.hash_dict(name, surname)
-        user = database.user_database_info[0].get(user_id)
+        if id in database:  # Removes user if in the Database
+            database.pop(id)
+            UserDatabase.update_user_database(database)
+            print("User Removed!")
+        else:   
+            print("User is not on the database!")
 
-        if user:
-            print("User Found!")
-            return user    
-        print("User does not exit")
-        return None
+
+
+    # def find_user(self, name, surname):
+    #     """Find user based on name and surname
+        
+    #     Keyword arguments:
+    #         name (str) -- first name of user
+    #         surname (str) -- last name of user
+        
+    #     Return:
+    #         Returns user if in list of users, otherwise returns None
+    #     """
+    #     database = self.list_of_users
+    #     user_id = HashDict.hash_dict(name, surname)
+    #     user = database.user_database_info[0].get(user_id)
+
+    #     if user:
+    #         print("User Found!")
+    #         return user    
+    #     print("User does not exit")
+    #     return None
 
 
     def display_users(self):

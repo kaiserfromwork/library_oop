@@ -33,7 +33,7 @@ class UserDatabase():
             print(f"Error loading user info from database: {error}")
             return {}
         
-    def update_user_database(self, user_database):
+    def update_user_database(user_database):
         """Updates user database
         
         Keyword arguments:
