@@ -91,15 +91,28 @@ class Library():
     ######## USER ####################################################################################
     
     def delete_user(self, user: User):
-        database = self.list_of_users.user_database_info # storing dict 
+        database = self.list_of_users.user_database_info # storing dict database
         id = user.get_user_id()
 
         if id in database:  # Removes user if in the Database
             database.pop(id)
             UserDatabase.update_user_database(database)
-            print("User Removed!")
+            print("User removed!")
         else:   
             print("User is not on the database!")
+
+
+    def add_user(self, user: User):
+        database = self.list_of_users.user_database_info # Storing dict database
+        id = user.get_user_id() # getting user ID
+
+        # Adding user to dict database
+        database[id] = {"name": user.name, "surname": user.surname, "books": user.borrowed_books}
+
+        print("User added to database!")
+        
+        # Will return True if added, False Otherwise
+        return UserDatabase.update_user_database(database)
 
 
 
