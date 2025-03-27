@@ -21,10 +21,19 @@ class Library():
     
     
     def add_book(self, book: Book):
-        database = self.list_of_books.book_database_info
-        id =  book.get_book_id()
+        """Adds book to database
+        
+        Keyword arguments:
+            book (Book) -- book (obj)
+            
+        """
+        
+        database = self.list_of_books.book_database_info  # storing database
+        id =  book.get_book_id() # getting book id
 
-        database[id] = {"title": book.title, "author": book.author, "year": book.year, "borrowed": book.borrowed}
+        # adding changes to database
+        database[id] = {"title": book.title, "author": book.author, "year": book.year, "borrowed": book.borrowed} 
+        
         BookDatabase.update_book_database(database)
 
     
@@ -48,15 +57,20 @@ class Library():
             print("Book not on the database.")
     
     
-    def find_book(self, title=None): # TODO need to fix this function. not really useful as of now
+    def find_book(self, title, author, year): 
         database = self.list_of_books.book_database_info
 
-        for book in database.values():
-            if title == book['title']:
-                print(f"Books is on the database")
+        
             
 
     def borrow_book(self, book: Book, user: User):
+        """User borrows book
+        
+        Keyword arguments:
+            book (Book) -- Book(obj)
+            user (User) -- User(obj)            
+        """
+        
         book_database = self.list_of_books.book_database_info
         user_database = self.list_of_users.user_database_info
         
@@ -65,7 +79,6 @@ class Library():
             book.borrow_book()
             user.borrowed_books[book.get_book_id()] = \
             {"title": book.title, "author": book.author, "year": book.year, "borrowed": book.borrowed}
-            
             print("User successfully borrowed the book")
         else:
             print(f"{book.name} is already being borrowed.")
@@ -82,6 +95,13 @@ class Library():
     ######## USER ####################################################################################
 
     def delete_user(self, user: User):
+        """Deletes user from database
+        
+        Keyword arguments:
+            user (User) -- user (obj)
+        
+        """
+        
         database = self.list_of_users.user_database_info # storing dict database
         id = user.get_user_id()
 
@@ -94,19 +114,31 @@ class Library():
 
 
     def add_user(self, user: User):
+        """Adds user to database
+        
+        Keyword arguments:
+            user (User) -- User(obj)
+        
+        """
         database = self.list_of_users.user_database_info # Storing dict database
         id = user.get_user_id() # getting user ID
 
         # Adding user to dict database
         database[id] = {"name": user.name, "surname": user.surname, "books": user.borrowed_books}
 
-        print("User added to database!")
-
-        # Will return True if added, False Otherwise
-        return UserDatabase.update_user_database(database)
+        UserDatabase.update_user_database(database)
 
     
     def find_user(self, name, surname):
+        """Finds if user is on the database
+        
+        Keyword arguments:
+            name (str) -- name used to find user
+            surname (str) -- surname used to find user
+        Return: 
+            Returns used if found and false if not found!
+        """
+        
         database = self.list_of_users.user_database_info
         id = HashDict.hash_dict(name, surname)
 
