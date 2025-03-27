@@ -26,6 +26,7 @@ print(library.find_user("Lucas", "de Oliveira"))
 library.add_book(book_01)
 library.add_book(book_02)
 # library.remove_book(book_01)
-library.find_book("1984")
 
 library.borrow_book(book_01, lucas)
+library.find_book("1984", "George Orwell", "1948")
+library.find_user("Lucas", "de Oliveira")

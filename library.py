@@ -59,7 +59,13 @@ class Library():
     
     def find_book(self, title, author, year): 
         database = self.list_of_books.book_database_info
+        book_id = HashDict.hash_dict_book(title, author, year)
 
+        if book_id in database:
+            return database[book_id]
+        else:
+            print("Book not found!")
+            return False
         
             
 
