@@ -11,7 +11,7 @@ lucas = User("Lucas", "de Oliveira")
 elric = User("Edward", "Elric")
 
 # Book
-book_01 = Book("1984", "George Orwell")
+book_01 = Book("1984", "George Orwell", "1948")
 
 ###################################################### - TEST - ######################################################
 db_user = UserDatabase()

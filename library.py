@@ -29,7 +29,7 @@ class Library():
 
     
 
-    def remove_book(self, book: Book):
+    def remove_book(self, book: Book): #TODO Implement remove book function
         """Removes book from list of books owned by Library
         
         Keyword arguments:
@@ -38,33 +38,10 @@ class Library():
         Return:
             Return 
         """
-        
-        if isinstance(book, Book): # Checks if book is instance of Book()
-            if book in self.list_of_books:
-                self.list_of_books.remove(book)
-                print("Book removed from Library")
-                return True
-            
-            else:
-                print(f"{book.title} is not on the library list.")
-                return False
-            
-        else:
-            print(f"Not a instance of Book() class")
-            return False    
-    
-
-    def display_books(self):
-        """Display list of books owned by the Library
-        
-        Return: 
-            Returns list of Books
-        """
-        
-        return self.list_of_books
+        pass
     
     
-    def find_book(self, book_title, book_author):
+    def find_book(self, book_title, book_author): # TODO Implement function
         """ Finds book in list of books owned by Library
         
         Keyword arguments:
@@ -78,7 +55,7 @@ class Library():
         for book in self.list_of_books:
             return book if book.title == book_title and book.author == book_author else None
 
-    def borrow_book(self, book_title, user_name):
+    def borrow_book(self, book_title, user_name): # TODO implement function, maybe create a new JSON file for books borrowed
         pass   
     
     ######## USER ####################################################################################
