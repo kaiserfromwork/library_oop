@@ -29,18 +29,15 @@ class Library():
 
     
 
-    def remove_book(self, book: Book): #TODO Implement remove book function
-        """Removes book from list of books owned by Library
+    def remove_book(self, book: Book): 
+        """Removes books from the database
         
         Keyword arguments:
             book (obj) -- Object of type Book() 
         
-        Return:
-            Return 
         """
         database = self.list_of_books.book_database_info
         id = book.get_book_id()
-        print(f"ID: {id}")
 
         if id in database:
             database.pop(id)
@@ -51,19 +48,13 @@ class Library():
             print("Book not on the database.")
     
     
-    def find_book(self, book_title, book_author): # TODO Implement function
-        """ Finds book in list of books owned by Library
-        
-        Keyword arguments:
-         book_title (str) -- title of book
-         book_author (str) -- author of book
+    def find_book(self, title=None, author=None): # TODO Implement function
+        database = self.list_of_books.book_database_info
 
-        Return: 
-            Returns book if in book list, otherwise returns None
-        """
-        
-        for book in self.list_of_books:
-            return book if book.title == book_title and book.author == book_author else None
+        for book in database.values():
+            if title == book['title']:
+                print(f"Books is on the database")
+            
 
     def borrow_book(self, book_title, user_name): # TODO implement function, maybe create a new JSON file for books borrowed
         pass   
