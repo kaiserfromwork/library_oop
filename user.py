@@ -11,7 +11,7 @@ class User():
         self.name = name
         self.surname = surname
         self._id = self.create_user_id(name, surname)
-        self.borrowed_books = []
+        self.borrowed_books = {}
 
     # use this func to get protected self._id of the user
     def get_user_id(self):

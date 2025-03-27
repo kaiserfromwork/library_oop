@@ -7,12 +7,15 @@ class Book():
         self.title = title
         self.author = author
         self.borrowed = borrowed
-        self._book_id = self.create_book_id(title, author, year)   # TODO: Maybe add a new attribute to display what user is borrowing the book
+        self.year = year
+        self._book_id = self.create_book_id(title, author, year)   
 
 
     def create_book_id(self, title, author, year):
         return HashDict.hash_dict_book(title, author, year)
         
+    def borrow_book(self):
+        self.borrowed = True
 
 
     def get_book_id(self):

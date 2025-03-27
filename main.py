@@ -21,9 +21,11 @@ library.add_user(elric)
 
 print(library.find_user("Lucas", "de Oliveira"))
 # print(library.display_user_list)
-library.delete_user(lucas)
+# library.delete_user(lucas)
 
 library.add_book(book_01)
 library.add_book(book_02)
 # library.remove_book(book_01)
 library.find_book("1984")
+
+library.borrow_book(book_01, lucas)

@@ -24,7 +24,7 @@ class Library():
         database = self.list_of_books.book_database_info
         id =  book.get_book_id()
 
-        database[id] = {"title": book.title, "author": book.author, "borrowed": book.borrowed}
+        database[id] = {"title": book.title, "author": book.author, "year": book.year, "borrowed": book.borrowed}
         BookDatabase.update_book_database(database)
 
     
@@ -48,7 +48,7 @@ class Library():
             print("Book not on the database.")
     
     
-    def find_book(self, title=None, author=None): # TODO Implement function
+    def find_book(self, title=None): # TODO need to fix this function. not really useful as of now
         database = self.list_of_books.book_database_info
 
         for book in database.values():
@@ -56,11 +56,31 @@ class Library():
                 print(f"Books is on the database")
             
 
-    def borrow_book(self, book_title, user_name): # TODO implement function, maybe create a new JSON file for books borrowed
-        pass   
-    
+    def borrow_book(self, book: Book, user: User):
+        book_database = self.list_of_books.book_database_info
+        user_database = self.list_of_users.user_database_info
+        
+        # Changing book's status to borrowed and adding book to list of books user is borrowing
+        if book.borrowed == False:
+            book.borrow_book()
+            user.borrowed_books[book.get_book_id()] = \
+            {"title": book.title, "author": book.author, "year": book.year, "borrowed": book.borrowed}
+            
+            print("User successfully borrowed the book")
+        else:
+            print(f"{book.name} is already being borrowed.")
+
+        book_database[book.get_book_id()] = {"title": book.title, "author": book.author, "year": book.year, "borrowed": book.borrowed}
+        user_database[user.get_user_id()] = {"name": user.name, "surname": user.surname, "books": user.borrowed_books}
+
+        BookDatabase.update_book_database(book_database)
+        UserDatabase.update_user_database(user_database)
+
+
+
+
     ######## USER ####################################################################################
-    
+
     def delete_user(self, user: User):
         database = self.list_of_users.user_database_info # storing dict database
         id = user.get_user_id()
