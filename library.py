@@ -38,7 +38,17 @@ class Library():
         Return:
             Return 
         """
-        pass
+        database = self.list_of_books.book_database_info
+        id = book.get_book_id()
+        print(f"ID: {id}")
+
+        if id in database:
+            database.pop(id)
+            BookDatabase.update_book_database(database)
+            print("Book removed from database.")
+
+        else:
+            print("Book not on the database.")
     
     
     def find_book(self, book_title, book_author): # TODO Implement function

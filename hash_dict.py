@@ -31,5 +31,5 @@ class HashDict:
             Returns a hash string unique id
         """
         
-        unique_id = f"{title}{author}{year}{time.time()}" # string used to create unique hash id
+        unique_id = f"{title}{author}{year}" # string used to create unique hash id
         return hashlib.sha256(unique_id.encode()).hexdigest()

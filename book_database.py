@@ -21,12 +21,11 @@ class BookDatabase:
         
 
     def update_book_database(book_database):
-        if book_database:
-            try:
-                with open(FILENAME, "w") as file:
-                    json.dump(book_database, file, indent=4)
-                return True
-            
-            except (json.JSONDecodeError) as error:
-                print(f"Error trying to update file: {error}")
-                return False
+        try:
+            with open(FILENAME, "w") as file:
+                json.dump(book_database, file, indent=4)
+                
+            return True
+        except (json.JSONDecodeError) as error:
+            print(f"Error trying to update file: {error}")
+            return False

@@ -8,6 +8,7 @@ library = Library()
 
 # User
 lucas = User("Lucas", "de Oliveira")
+luka = User("Lucas", "de Oliveira")
 elric = User("Edward", "Elric")
 
 # Book
@@ -16,6 +17,7 @@ book_01 = Book("1984", "George Orwell", "1948")
 ###################################################### - TEST - ######################################################
 db_user = UserDatabase()
 library.add_user(lucas)
+library.add_user(luka)
 library.add_user(elric)
 
 print(library.find_user("Lucas", "de Oliveira"))
@@ -23,3 +25,4 @@ print(library.find_user("Lucas", "de Oliveira"))
 library.delete_user(lucas)
 
 library.add_book(book_01)
+library.remove_book(book_01)
