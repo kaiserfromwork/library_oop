@@ -88,7 +88,11 @@ class Library():
             return False
         else:
             borrowed_book_database[book_id] = {"user_id":  user.get_user_id(), "date": str(datetime.now().date())}  
+
+            # Updating database (JSON file)
             BorrowedBooksDatabase.update_borrowed_books(borrowed_book_database)
+            # Updating in-memory database
+            BorrowedBooksDatabase.create_user_book_index()
         
 
 

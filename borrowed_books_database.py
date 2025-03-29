@@ -9,7 +9,7 @@ class BorrowedBooksDatabase:
 
     def __init__(self):
         self.borrowed_books_data = self.load_borrowed_books()
-        self.list_user_book_index = {   }
+        self.list_user_book_index = {}
 
 
     def load_borrowed_books(self):
@@ -39,7 +39,6 @@ class BorrowedBooksDatabase:
     def create_user_book_index(self):
         database = self.borrowed_books_data 
         user_book_index_db = {}
-        print(database)
 
         for book_id, data in database.items():
             user_id = data.get('user_id')
@@ -49,6 +48,3 @@ class BorrowedBooksDatabase:
             else:
                 user_book_index_db[user_id] = {}
                 
-        print("user_book index db")
-        print(user_book_index_db)
-            
