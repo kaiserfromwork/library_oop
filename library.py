@@ -95,7 +95,20 @@ class Library():
             BorrowedBooksDatabase.create_user_book_index()
         
 
+    def return_book(self, book: Book):
+        borrowed_book_database = self.list_of_borrowed_books.borrowed_books_data
+        book_id = book.get_book_id()
 
+        if book_id in borrowed_book_database:
+            borrowed_book_database.pop(book_id)
+            # Updating database (JSON file)
+            BorrowedBooksDatabase.update_borrowed_books(borrowed_book_database)
+            # Updating in-memory database
+            BorrowedBooksDatabase.create_user_book_index()
+            print(f"{book.title} returned.")
+        else:
+            print(f"{book.title} is not being used.")
+        
 
 
     ######## USER ####################################################################################
