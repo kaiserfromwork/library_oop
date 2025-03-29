@@ -36,7 +36,6 @@ class Library():
 
         # adding changes to database
         database[book_id] = {"title": book.title, "author": book.author, "year": book.year} 
-        
         self.books_db.update_book_database(database)
 
     
@@ -54,11 +53,9 @@ class Library():
         if id in database:
             database.pop(book_id)
             self.books_db.update_book_database(database)
-            print("Book removed from database.")
-
+            return True
         else:
-            print("Book not on the database.")
-    
+            return False
     
     def find_book(self, title, author, year): 
         database = self.books_db.book_database_info
@@ -67,7 +64,6 @@ class Library():
         if book_id in database:
             return database[book_id]
         else:
-            print("Book not found!")
             return False
         
             
@@ -84,16 +80,14 @@ class Library():
         book_id = book.get_book_id()
 
         if book_id in borrowed_book_database:
-            print(f"Book: {book.title} already being borrowed.")
             return False
         else:
             borrowed_book_database[book_id] = {"user_id":  user.get_user_id(), "date": str(datetime.now().date())}  
-
             # Updating database (JSON file)
             self.borrowed_books_db.update_borrowed_books(borrowed_book_database)
             # Updating in-memory database
             self.borrowed_books_db.create_user_book_index()
-        
+            return True
 
     def return_book(self, book: Book):
         borrowed_book_database = self.borrowed_books_db.borrowed_books_data
@@ -105,9 +99,9 @@ class Library():
             self.books_db.update_borrowed_books(borrowed_book_database)
             # Updating in-memory database
             self.books_db.create_user_book_index(borrowed_book_database)
-            print(f"{book.title} returned.")
+            return True
         else:
-            print(f"{book.title} is not being used.")
+           return False
         
 
 
@@ -127,10 +121,9 @@ class Library():
         if id in database:  # Removes user if in the Database
             database.pop(id)
             self.user_db.update_user_database(database)
-            print("User removed!")
+            return True
         else:   
-            print("User is not on the database!")
-
+            return False
 
     def add_user(self, user: User):
         """Adds user to database
@@ -162,9 +155,7 @@ class Library():
         id = HashDict.hash_dict(name, surname)
 
         if id in database:
-            print(f"User: {name} {surname} found!")
             return database[id]
         else:
-            print(f"Could not find user with name: {name} and surname: {surname}")
             return False
     
