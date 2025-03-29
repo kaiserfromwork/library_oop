@@ -1,7 +1,18 @@
+# import Database
+from user_database import UserDatabase
+from borrowed_books_database import BorrowedBooksDatabase
+
+
+# Import Modules
 from library import Library
 from user import User
 from book import Book
-from user_database import UserDatabase
+
+# Initiating
+
+# Database
+db_user = UserDatabase()
+borrowed_book_db = BorrowedBooksDatabase()
 
 # Library
 library = Library()
@@ -15,7 +26,6 @@ book_01 = Book("1984", "George Orwell", "1948")
 book_02 = Book("Pride and Prejudice", "Jane Austen", "1813")
 
 ###################################################### - TEST - ######################################################
-db_user = UserDatabase()
 library.add_user(lucas)
 library.add_user(elric)
 
@@ -28,5 +38,9 @@ library.add_book(book_02)
 # library.remove_book(book_01)
 
 library.borrow_book(book_01, lucas)
+library.borrow_book(book_02, lucas)
 library.find_book("1984", "George Orwell", "1948")
 library.find_user("Lucas", "de Oliveira")
+
+ 
+borrowed_book_db.create_user_book_index()

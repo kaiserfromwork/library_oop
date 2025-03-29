@@ -1,7 +1,7 @@
 
 # import modules
 import json
-
+from datetime import datetime
 
 FILENAME = "borrowed_books_database.json"
 
@@ -9,7 +9,7 @@ class BorrowedBooksDatabase:
 
     def __init__(self):
         self.borrowed_books_data = self.load_borrowed_books()
-        # self.list_users_books= self.load_users_books()
+        self.list_user_book_index = {   }
 
 
     def load_borrowed_books(self):
@@ -36,5 +36,19 @@ class BorrowedBooksDatabase:
             return False
 
 
-    def load_users_books():
-        pass
+    def create_user_book_index(self):
+        database = self.borrowed_books_data 
+        user_book_index_db = {}
+        print(database)
+
+        for book_id, data in database.items():
+            user_id = data.get('user_id')
+
+            if user_id in user_book_index_db: # Checking if dict[user_id] exists to avoid key error
+                user_book_index_db[user_id][book_id] = {datetime.now().date()}
+            else:
+                user_book_index_db[user_id] = {}
+                
+        print("user_book index db")
+        print(user_book_index_db)
+            
