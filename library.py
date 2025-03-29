@@ -1,5 +1,6 @@
 # Library 
 import json
+from datetime import datetime
 
 # Database import (JSON Files)
 from book_database import BookDatabase
@@ -86,7 +87,7 @@ class Library():
             print(f"Book: {book.title} already being borrowed.")
             return False
         else:
-            borrowed_book_database[book_id] = {"user_id":  user.get_user_id()}  
+            borrowed_book_database[book_id] = {"user_id":  user.get_user_id(), "date": str(datetime.now().date())}  
             BorrowedBooksDatabase.update_borrowed_books(borrowed_book_database)
         
 

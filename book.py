@@ -36,3 +36,15 @@ class FictionBook(Book):
         parent_class = super().display_book()
 
         return f"{parent_class}, genre : {self.genre}"
+    
+
+class NonFictionBook(Book):
+
+    def __init__(self, title, author, year, genre="Non Fiction"):
+        super().__init__(title, author, year)
+        self.genre = genre
+
+    def display_book(self):
+        parent_class = super().display_book()
+
+        return f"{parent_class}, genre : {self.genre}"
