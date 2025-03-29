@@ -36,8 +36,7 @@ class BorrowedBooksDatabase:
             return False
 
 
-    def create_user_book_index(self):
-        database = self.borrowed_books_data 
+    def create_user_book_index(database):
         user_book_index_db = {}
 
         for book_id, data in database.items():

@@ -42,5 +42,4 @@ library.borrow_book(book_02, lucas)
 library.find_book("1984", "George Orwell", "1948")
 library.find_user("Lucas", "de Oliveira")
 
- 
-borrowed_book_db.create_user_book_index()
+library.return_book(book_01)

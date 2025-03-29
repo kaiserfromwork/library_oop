@@ -92,7 +92,7 @@ class Library():
             # Updating database (JSON file)
             BorrowedBooksDatabase.update_borrowed_books(borrowed_book_database)
             # Updating in-memory database
-            BorrowedBooksDatabase.create_user_book_index()
+            BorrowedBooksDatabase.create_user_book_index(borrowed_book_database)
         
 
     def return_book(self, book: Book):
@@ -104,7 +104,7 @@ class Library():
             # Updating database (JSON file)
             BorrowedBooksDatabase.update_borrowed_books(borrowed_book_database)
             # Updating in-memory database
-            BorrowedBooksDatabase.create_user_book_index()
+            BorrowedBooksDatabase.create_user_book_index(borrowed_book_database)
             print(f"{book.title} returned.")
         else:
             print(f"{book.title} is not being used.")
