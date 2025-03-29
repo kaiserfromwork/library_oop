@@ -18,6 +18,7 @@ class Library():
     def __init__(self):  # Constructor
         self.list_of_users = UserDatabase()
         self.list_of_books = BookDatabase()
+        self.list_of_borrowed_books = BorrowedBooksDatabase()
     
     
     def add_book(self, book: Book):
