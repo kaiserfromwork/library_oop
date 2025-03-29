@@ -20,7 +20,7 @@ class BookDatabase:
             return {}
         
 
-    def update_book_database(book_database):
+    def update_book_database(self, book_database):
         try:
             with open(FILENAME, "w") as file:
                 json.dump(book_database, file, indent=4)

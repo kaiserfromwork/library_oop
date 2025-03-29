@@ -90,9 +90,9 @@ class Library():
             borrowed_book_database[book_id] = {"user_id":  user.get_user_id(), "date": str(datetime.now().date())}  
 
             # Updating database (JSON file)
-            self.books_db.update_borrowed_books(borrowed_book_database)
+            self.borrowed_books_db.update_borrowed_books(borrowed_book_database)
             # Updating in-memory database
-            self.books_db.create_user_book_index()
+            self.borrowed_books_db.create_user_book_index()
         
 
     def return_book(self, book: Book):

@@ -23,7 +23,7 @@ class BorrowedBooksDatabase:
 
 
 
-    def update_borrowed_books(database):
+    def update_borrowed_books(self, database):
         try:
             with open(FILENAME, "w") as file:
                 json.dump(database, file, indent=4)
@@ -48,4 +48,4 @@ class BorrowedBooksDatabase:
             else:
                 user_book_index_db[user_id] = {}
         
-        user_book_index_db = self.list_user_book_index
+        return user_book_index_db
