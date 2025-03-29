@@ -4,6 +4,7 @@ import json
 # Database import (JSON Files)
 from book_database import BookDatabase
 from user_database import UserDatabase
+from borrowed_books_database import BorrowedBooksDatabase
 
 # classes  import
 from book import Book
@@ -33,7 +34,7 @@ class Library():
         id =  book.get_book_id() # getting book id
 
         # adding changes to database
-        database[id] = {"title": book.title, "author": book.author, "year": book.year, "borrowed": book.borrowed} 
+        database[id] = {"title": book.title, "author": book.author, "year": book.year} 
         
         BookDatabase.update_book_database(database)
 
@@ -85,13 +86,13 @@ class Library():
         if book.borrowed == False:
             book.borrow_book()
             user.borrowed_books[book.get_book_id()] = \
-            {"title": book.title, "author": book.author, "year": book.year, "borrowed": book.borrowed}
+            {"title": book.title, "author": book.author, "year": book.year}
             print("User successfully borrowed the book")
         else:
             print(f"{book.name} is already being borrowed.")
 
-        book_database[book.get_book_id()] = {"title": book.title, "author": book.author, "year": book.year, "borrowed": book.borrowed}
-        user_database[user.get_user_id()] = {"name": user.name, "surname": user.surname, "books": user.borrowed_books}
+        book_database[book.get_book_id()] = {"title": book.title, "author": book.author, "year": book.year, }
+        user_database[user.get_user_id()] = {"name": user.name, "surname": user.surname}
 
         BookDatabase.update_book_database(book_database)
         UserDatabase.update_user_database(user_database)
@@ -131,7 +132,7 @@ class Library():
         id = user.get_user_id() # getting user ID
 
         # Adding user to dict database
-        database[id] = {"name": user.name, "surname": user.surname, "books": user.borrowed_books}
+        database[id] = {"name": user.name, "surname": user.surname}
 
         UserDatabase.update_user_database(database)
 
