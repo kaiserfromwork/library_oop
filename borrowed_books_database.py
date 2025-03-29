@@ -42,9 +42,10 @@ class BorrowedBooksDatabase:
 
         for book_id, data in database.items():
             user_id = data.get('user_id')
+            borrowed_date = data.get('date')
 
             if user_id in user_book_index_db: # Checking if dict[user_id] exists to avoid key error
-                user_book_index_db[user_id][book_id] = {str(datetime.now().date())}
+                user_book_index_db[user_id][book_id] = {borrowed_date}
             else:
                 user_book_index_db[user_id] = {}
         
