@@ -50,12 +50,13 @@ class Library():
         database = self.books_db.book_database_info
         book_id = book.get_book_id()
 
-        if id in database:
+        if book_id in database:
             database.pop(book_id)
             self.books_db.update_book_database(database)
             return True
         else:
             return False
+        
     
     def find_book(self, title, author, year): 
         database = self.books_db.book_database_info
@@ -64,9 +65,8 @@ class Library():
         if book_id in database:
             return database[book_id]
         else:
-            return False
+            return None
         
-            
 
     def borrow_book(self, book: Book, user: User):
         """User borrows book
@@ -80,7 +80,7 @@ class Library():
         book_id = book.get_book_id()
 
         if book_id in borrowed_book_database:
-            return False
+            return None
         else:
             borrowed_book_database[book_id] = {"user_id":  user.get_user_id(), "date": str(datetime.now().date())}  
             # Updating database (JSON file)
@@ -137,7 +137,6 @@ class Library():
 
         # Adding user to dict database
         database[id] = {"name": user.name, "surname": user.surname}
-
         self.user_db.update_user_database(database)
 
     
@@ -157,5 +156,5 @@ class Library():
         if id in database:
             return database[id]
         else:
-            return False
+            return None
     
