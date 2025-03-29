@@ -4,6 +4,7 @@ import time
 
 class HashDict:
 
+    @staticmethod
     def hash_dict(name, surname):
         """Creates a hash string id using user's name and surname
         
@@ -18,7 +19,7 @@ class HashDict:
         unique_id = f"{name}{surname}"  # String used to create unique hash id
         return hashlib.sha256(unique_id.encode()).hexdigest()
     
-
+    @staticmethod
     def hash_dict_book(title, author, year):
         """Creates a hash string using book's title, author and year. Used as ID
         

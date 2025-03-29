@@ -27,14 +27,14 @@ class User():
 
 class StudentUser(User):
 
-    def __init__(self, name, surname, _id, faculty):
-        super().__init__(name, surname, _id)
+    def __init__(self, name, surname, faculty):
+        super().__init__(name, surname)
         self.faculty = faculty
 
 
 
 class StaffUser(User):
 
-    def __init__(self, name, surname, _id, position):
-        super().__init__(name, surname, _id)
+    def __init__(self, name, surname, position):
+        super().__init__(name, surname)
         self.position = position
