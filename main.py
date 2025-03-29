@@ -1,5 +1,6 @@
 # import Database
 from user_database import UserDatabase
+from book_database import BookDatabase
 from borrowed_books_database import BorrowedBooksDatabase
 
 
@@ -11,11 +12,14 @@ from book import Book
 # Initiating
 
 # Database
-db_user = UserDatabase()
+user_db = UserDatabase()
+books_db = BookDatabase()
 borrowed_book_db = BorrowedBooksDatabase()
 
+
 # Library
-library = Library()
+library = Library(user_db, books_db, borrowed_book_db)
+
 
 # User
 lucas = User("Lucas", "de Oliveira")
@@ -42,4 +46,4 @@ library.borrow_book(book_02, lucas)
 library.find_book("1984", "George Orwell", "1948")
 library.find_user("Lucas", "de Oliveira")
 
-library.return_book(book_01)
+# library.return_book(book_01)

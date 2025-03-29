@@ -17,10 +17,10 @@ from hash_dict import HashDict
 FILENAME = "user_database.json"
 class Library():
 
-    def __init__(self):  # Constructor
-        self.list_of_users = UserDatabase()
-        self.list_of_books = BookDatabase()
-        self.list_of_borrowed_books = BorrowedBooksDatabase()
+    def __init__(self, user_db, books_db, borrowed_books_db):  # Constructor
+        self.user_db = user_db
+        self.books_db = books_db
+        self.borrowed_books_db = borrowed_books_db
     
     
     def add_book(self, book: Book):
@@ -31,13 +31,13 @@ class Library():
             
         """
         
-        database = self.list_of_books.book_database_info  # storing database
+        database = self.books_db.book_database_info  # storing database
         book_id =  book.get_book_id() # getting book id
 
         # adding changes to database
         database[book_id] = {"title": book.title, "author": book.author, "year": book.year} 
         
-        BookDatabase.update_book_database(database)
+        self.books_db.update_book_database(database)
 
     
 
@@ -48,12 +48,12 @@ class Library():
             book (obj) -- Object of type Book() 
         
         """
-        database = self.list_of_books.book_database_info
+        database = self.books_db.book_database_info
         book_id = book.get_book_id()
 
         if id in database:
             database.pop(book_id)
-            BookDatabase.update_book_database(database)
+            self.books_db.update_book_database(database)
             print("Book removed from database.")
 
         else:
@@ -61,7 +61,7 @@ class Library():
     
     
     def find_book(self, title, author, year): 
-        database = self.list_of_books.book_database_info
+        database = self.books_db.book_database_info
         book_id = HashDict.hash_dict_book(title, author, year)
 
         if book_id in database:
@@ -80,7 +80,7 @@ class Library():
             user (User) -- User(obj)            
         """
         
-        borrowed_book_database = self.list_of_borrowed_books.borrowed_books_data      
+        borrowed_book_database = self.borrowed_books_db.borrowed_books_data      
         book_id = book.get_book_id()
 
         if book_id in borrowed_book_database:
@@ -90,21 +90,21 @@ class Library():
             borrowed_book_database[book_id] = {"user_id":  user.get_user_id(), "date": str(datetime.now().date())}  
 
             # Updating database (JSON file)
-            BorrowedBooksDatabase.update_borrowed_books(borrowed_book_database)
+            self.books_db.update_borrowed_books(borrowed_book_database)
             # Updating in-memory database
-            BorrowedBooksDatabase.create_user_book_index(borrowed_book_database)
+            self.books_db.create_user_book_index()
         
 
     def return_book(self, book: Book):
-        borrowed_book_database = self.list_of_borrowed_books.borrowed_books_data
+        borrowed_book_database = self.borrowed_books_db.borrowed_books_data
         book_id = book.get_book_id()
 
         if book_id in borrowed_book_database:
             borrowed_book_database.pop(book_id)
             # Updating database (JSON file)
-            BorrowedBooksDatabase.update_borrowed_books(borrowed_book_database)
+            self.books_db.update_borrowed_books(borrowed_book_database)
             # Updating in-memory database
-            BorrowedBooksDatabase.create_user_book_index(borrowed_book_database)
+            self.books_db.create_user_book_index(borrowed_book_database)
             print(f"{book.title} returned.")
         else:
             print(f"{book.title} is not being used.")
@@ -121,12 +121,12 @@ class Library():
         
         """
         
-        database = self.list_of_users.user_database_info # storing dict database
+        database = self.user_db.user_database_info # storing dict database
         id = user.get_user_id()
 
         if id in database:  # Removes user if in the Database
             database.pop(id)
-            UserDatabase.update_user_database(database)
+            self.user_db.update_user_database(database)
             print("User removed!")
         else:   
             print("User is not on the database!")
@@ -139,13 +139,13 @@ class Library():
             user (User) -- User(obj)
         
         """
-        database = self.list_of_users.user_database_info # Storing dict database
+        database = self.user_db.user_database_info # Storing dict database
         id = user.get_user_id() # getting user ID
 
         # Adding user to dict database
         database[id] = {"name": user.name, "surname": user.surname}
 
-        UserDatabase.update_user_database(database)
+        self.user_db.update_user_database(database)
 
     
     def find_user(self, name, surname):
@@ -158,7 +158,7 @@ class Library():
             Returns used if found and false if not found!
         """
         
-        database = self.list_of_users.user_database_info
+        database = self.user_db.user_database_info
         id = HashDict.hash_dict(name, surname)
 
         if id in database:

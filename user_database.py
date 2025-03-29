@@ -53,30 +53,6 @@ class UserDatabase():
             return False
 
 
-    def save_user_to_database(self, user):
-        """Saves information of user to database
-        
-        Keyword arguments:
-        user (obj) -- user object
-        
-        Return: 
-            return False if fails to write to file
-        """
-        
-        user_database = self.user_database_info # storing JSON from file as a dict
-        id = user.get_user_id() # getting user id 
-
-        # Adding user to dict data structure
-        user_database[id] =  {"name": user.name, "surname": user.surname, "books": user.borrowed_books}
-        
-        # Writing to JSON file
-        try:
-            with open(FILENAME, "w") as file:
-                json.dump(user_database, file, indent=4)
-
-        except (OSError, json.JSONDecodeError) as error:
-            print(f"Error saving user to database: {error}")
-            return False
         
 
 
