@@ -9,20 +9,21 @@ class BorrowedBooksDatabase:
 
     def __init__(self):
         self.borrowed_books_data = self.load_borrowed_books()
-        self.list_users_books= self.load_users_books()
+        # self.list_users_books= self.load_users_books()
 
 
     def load_borrowed_books(self):
         try:
             with open(FILENAME, "r") as file:
-                json.load(file)
+                return json.load(file)
 
         except (FileNotFoundError, json.JSONDecodeError) as error:
             print(f"Error trying to read borrowed books database: {error}")
+            return {}
 
 
 
-    def update_borrowed_books(self, database):
+    def update_borrowed_books(database):
         try:
             with open(FILENAME, "w") as file:
                 json.dump(database, file, indent=4)

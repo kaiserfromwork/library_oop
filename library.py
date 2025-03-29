@@ -31,10 +31,10 @@ class Library():
         """
         
         database = self.list_of_books.book_database_info  # storing database
-        id =  book.get_book_id() # getting book id
+        book_id =  book.get_book_id() # getting book id
 
         # adding changes to database
-        database[id] = {"title": book.title, "author": book.author, "year": book.year} 
+        database[book_id] = {"title": book.title, "author": book.author, "year": book.year} 
         
         BookDatabase.update_book_database(database)
 
@@ -48,10 +48,10 @@ class Library():
         
         """
         database = self.list_of_books.book_database_info
-        id = book.get_book_id()
+        book_id = book.get_book_id()
 
         if id in database:
-            database.pop(id)
+            database.pop(book_id)
             BookDatabase.update_book_database(database)
             print("Book removed from database.")
 
@@ -79,23 +79,16 @@ class Library():
             user (User) -- User(obj)            
         """
         
-        book_database = self.list_of_books.book_database_info
-        user_database = self.list_of_users.user_database_info
-        
-        # Changing book's status to borrowed and adding book to list of books user is borrowing
-        if book.borrowed == False:
-            book.borrow_book()
-            user.borrowed_books[book.get_book_id()] = \
-            {"title": book.title, "author": book.author, "year": book.year}
-            print("User successfully borrowed the book")
+        borrowed_book_database = self.list_of_borrowed_books.borrowed_books_data      
+        book_id = book.get_book_id()
+
+        if book_id in borrowed_book_database:
+            print(f"Book: {book.title} already being borrowed.")
+            return False
         else:
-            print(f"{book.name} is already being borrowed.")
-
-        book_database[book.get_book_id()] = {"title": book.title, "author": book.author, "year": book.year, }
-        user_database[user.get_user_id()] = {"name": user.name, "surname": user.surname}
-
-        BookDatabase.update_book_database(book_database)
-        UserDatabase.update_user_database(user_database)
+            borrowed_book_database[book_id] = {"user_id":  user.get_user_id()}  
+            BorrowedBooksDatabase.update_borrowed_books(borrowed_book_database)
+        
 
 
 
