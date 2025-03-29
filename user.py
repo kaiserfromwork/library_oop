@@ -22,4 +22,19 @@ class User():
 
 
     def __str__(self):
-        return f"{self.name, self.surname, self.borrowed_books}"
+        return f"{self.name, self.surname}"
+    
+
+class StudentUser(User):
+
+    def __init__(self, name, surname, _id, faculty):
+        super().__init__(name, surname, _id)
+        self.faculty = faculty
+
+
+
+class StaffUser(User):
+
+    def __init__(self, name, surname, _id, position):
+        super().__init__(name, surname, _id)
+        self.position = position
