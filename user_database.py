@@ -1,5 +1,4 @@
 # Database
-#class imports
 # module imports
 import json
 
@@ -30,8 +29,7 @@ class UserDatabase():
                 return json.load(file)
                 
         except (FileNotFoundError, json.JSONDecodeError) as error:
-            print(f"Error loading user info from database: {error}")
-            return {}
+          raise (f"Error while reading {FILENAME}: {error}")
         
     def update_user_database(self, user_database):
         """Updates user database
@@ -49,8 +47,7 @@ class UserDatabase():
                 json.dump(user_database, file, indent=4)
             return True
         except (OSError, json.JSONDecodeError) as error:
-            print("Error while updating database: {error}")
-            return False
+            raise (f"Error while writing to {FILENAME}: {error}")
 
 
         

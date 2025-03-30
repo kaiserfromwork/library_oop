@@ -18,8 +18,7 @@ class BorrowedBooksDatabase:
                 return json.load(file)
 
         except (FileNotFoundError, json.JSONDecodeError) as error:
-            print(f"Error trying to read borrowed books database: {error}")
-            return {}
+            raise (f"Error while reading {FILENAME}: {error}")
 
 
 
@@ -27,13 +26,12 @@ class BorrowedBooksDatabase:
         try:
             with open(FILENAME, "w") as file:
                 json.dump(database, file, indent=4)
-
-            print("Borrowed books database updated!")
             return True
         
         except (json.JSONDecodeError) as error:
-            print(f"Error trying to update borrowed books database: {error}")
-            return False
+            raise (f"Error while writing to {FILENAME}: {error}")
+                      
+
 
 
     def create_user_book_index(self):

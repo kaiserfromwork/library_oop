@@ -16,8 +16,7 @@ class BookDatabase:
                 return json.load(file)
             
         except (FileNotFoundError, json.JSONDecodeError) as error:
-            print(f"Error trying to read file: {error}")
-            return {}
+            raise (f"Error while reading {FILENAME}: {error}")
         
 
     def update_book_database(self, book_database):
@@ -27,5 +26,4 @@ class BookDatabase:
                 
             return True
         except (json.JSONDecodeError) as error:
-            print(f"Error trying to update file: {error}")
-            return False
+            raise (f"Error while writing to {FILENAME}: {error}")
