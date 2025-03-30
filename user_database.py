@@ -29,8 +29,8 @@ class UserDatabase():
                 return json.load(file)
                 
         except (FileNotFoundError, json.JSONDecodeError) as error:
+            print(f"Error while reading {FILENAME}: {error}")
             return {}
-        #   raise (f"Error while reading {FILENAME}: {error}")
 
         
     def update_user_database(self, user_database):

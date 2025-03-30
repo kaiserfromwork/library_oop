@@ -18,8 +18,8 @@ class BorrowedBooksDatabase:
                 return json.load(file)
 
         except (FileNotFoundError, json.JSONDecodeError) as error:
+            print(f"Error while reading {FILENAME}: {error}")
             return {}
-            # raise (f"Error while reading {FILENAME}: {error}")
 
 
 
@@ -29,7 +29,7 @@ class BorrowedBooksDatabase:
                 json.dump(database, file, indent=4)
             return True
         
-        except (json.JSONDecodeError) as error:
+        except (OSError, json.JSONDecodeError) as error:
             raise (f"Error while writing to {FILENAME}: {error}")
                       
 

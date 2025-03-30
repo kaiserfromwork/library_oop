@@ -12,9 +12,8 @@ from book import Book
 from user import User
 from hash_dict import HashDict
 
-
-
 FILENAME = "user_database.json"
+
 class Library():
 
     def __init__(self, user_db, books_db, borrowed_books_db):  # Constructor
@@ -95,10 +94,9 @@ class Library():
 
         if book_id in borrowed_book_database:
             borrowed_book_database.pop(book_id)
-            # Updating database (JSON file)
-            self.books_db.update_borrowed_books(borrowed_book_database)
-            # # Updating in-memory database
-            # self.books_db.create_user_book_index(borrowed_book_database)
+            
+            # Updating in-memory database
+            self.books_db.create_user_book_index(borrowed_book_database)
             return True
         else:
            return False
