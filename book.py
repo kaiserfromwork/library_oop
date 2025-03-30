@@ -19,11 +19,11 @@ class Book():
     
 
     def display_book(self):
-        return (f"tile : {self.title}, author: {self.author}, year: {self.year}")
+        return (f"Title : {self.title}, author: {self.author}, year: {self.year}")
 
 
     def __str__(self):
-        return self.title + self.author + self.year 
+        return (f"Title: {self.title}, Author: {self.author}, year: {self.year}")
 
 class FictionBook(Book):
 
