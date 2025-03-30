@@ -29,13 +29,18 @@ class Library():
             book (Book) -- book (obj)
             
         """
-        
-        database = self.books_db.book_database_info  # storing database
-        book_id =  book.get_book_id() # getting book id
+        try:
+            database = self.books_db.book_database_info  # storing database
+            book_id =  book.get_book_id() # getting book id
 
-        # adding changes to database
-        database[book_id] = {"title": book.title, "author": book.author, "year": book.year} 
-        self.books_db.update_book_database(database)
+            # adding changes to database
+            database[book_id] = {"title": book.title, "author": book.author, "year": book.year} 
+            self.books_db.update_book_database(database)
+            return True
+        
+        except Exception as error:
+            print(f"Error while trying to add book to database: {error}")
+            return False
 
     
 
@@ -46,16 +51,21 @@ class Library():
             book (obj) -- Object of type Book() 
         
         """
-        database = self.books_db.book_database_info
-        book_id = book.get_book_id()
+        try:
+            database = self.books_db.book_database_info
+            book_id = book.get_book_id()
 
-        if book_id in database:
-            database.pop(book_id)
-            self.books_db.update_book_database(database)
-            return True
-        else:
+            if book_id in database:
+                database.pop(book_id)
+                self.books_db.update_book_database(database)
+                return True
+            else:
+                return False
+            
+        except Exception as error:
+            print(f"Error trying to remove book from database: {error}")
             return False
-        
+
     
     def find_book(self, title, author, year): 
         database = self.books_db.book_database_info
@@ -75,31 +85,41 @@ class Library():
             user (User) -- User(obj)            
         """
         
-        borrowed_book_database = self.borrowed_books_db.borrowed_books_data      
-        book_id = book.get_book_id()
+        try: 
+            borrowed_book_database = self.borrowed_books_db.borrowed_books_data      
+            book_id = book.get_book_id()
 
-        if book_id in borrowed_book_database:
-            return None
-        else:
-            borrowed_book_database[book_id] = {"user_id":  user.get_user_id(), "date": str(datetime.now().date())}  
-            # Updating database (JSON file)
-            self.borrowed_books_db.update_borrowed_books(borrowed_book_database)
-            # Updating in-memory database
-            self.borrowed_books_db.create_user_book_index()
-            return True
+            if book_id in borrowed_book_database:
+                return False
+            else:
+                borrowed_book_database[book_id] = {"user_id":  user.get_user_id(), "date": str(datetime.now().date())}  
+                # Updating database (JSON file)
+                self.borrowed_books_db.update_borrowed_books(borrowed_book_database)
+                # Updating in-memory database
+                self.borrowed_books_db.create_user_book_index()
+                return True
+
+        except Exception as error:
+            print(f"Error trying to borrow book: {error}")
+            return False    
+        
 
     def return_book(self, book: Book):
-        borrowed_book_database = self.borrowed_books_db.borrowed_books_data
-        book_id = book.get_book_id()
+        try:
+            borrowed_book_database = self.borrowed_books_db.borrowed_books_data
+            book_id = book.get_book_id()
 
-        if book_id in borrowed_book_database:
-            borrowed_book_database.pop(book_id)
+            if book_id in borrowed_book_database:
+                borrowed_book_database.pop(book_id)
+                
+                # Updating in-memory database
+                self.books_db.create_user_book_index(borrowed_book_database)
+                return True
+            else: 
+                return False
             
-            # Updating in-memory database
-            self.books_db.create_user_book_index(borrowed_book_database)
-            return True
-        else:
-           return False
+        except Exception as error:
+            print(f"Error trying to return book: {error}")
         
 
 
@@ -130,12 +150,18 @@ class Library():
             user (User) -- User(obj)
         
         """
-        database = self.user_db.user_database_info # Storing dict database
-        id = user.get_user_id() # getting user ID
+        try:
+            database = self.user_db.user_database_info # Storing dict database
+            id = user.get_user_id() # getting user ID
 
-        # Adding user to dict database
-        database[id] = {"name": user.name, "surname": user.surname}
-        self.user_db.update_user_database(database)
+            # Adding user to dict database
+            database[id] = {"name": user.name, "surname": user.surname}
+            self.user_db.update_user_database(database)
+            return True
+        
+        except Exception as error:
+            print(f"Error trying to add user to database: {error}")
+            
 
     
     def find_user(self, name, surname):
@@ -147,12 +173,15 @@ class Library():
         Return: 
             Returns used if found and false if not found!
         """
-        
-        database = self.user_db.user_database_info
-        id = HashDict.hash_dict(name, surname)
+        try:
+            database = self.user_db.user_database_info
+            id = HashDict.hash_dict(name, surname)
 
-        if id in database:
-            return database[id]
-        else:
-            return None
+            if id in database:
+                return database[id]
+            else:
+                return None
+        
+        except Exception as error:
+            print(f"Error trying to find user: {error}")
     
