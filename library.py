@@ -27,6 +27,9 @@ class Library():
         
         Keyword arguments:
             book (Book) -- book (obj)
+        
+        Return:
+            returns if book is added, and false if an error occurs
             
         """
         try:
@@ -49,6 +52,9 @@ class Library():
         
         Keyword arguments:
             book (obj) -- Object of type Book() 
+
+        Return:
+            returns True if book is removed from database, and False if books is not in database or if error occurs
         
         """
         try:
@@ -68,6 +74,17 @@ class Library():
 
     
     def find_book(self, title, author, year): 
+        """Finds book using book's tittle, author and year.
+        
+        Keyword arguments:
+            title (str) -- title of the book
+            author (str) -- author of the book
+            year (str) -- year of the book
+
+        Return: 
+            returns book if in database and None otherwise
+        """
+        
         database = self.books_db.book_database_info
         book_id = HashDict.hash_dict_book(title, author, year)
 
@@ -82,7 +99,10 @@ class Library():
         
         Keyword arguments:
             book (Book) -- Book(obj)
-            user (User) -- User(obj)            
+            user (User) -- User(obj)        
+
+        Returns:
+            returns True if book is successfully found and added to borrowed_book database, and False if book already in database or if unexpected error occurs.     
         """
         
         try: 
@@ -105,6 +125,15 @@ class Library():
         
 
     def return_book(self, book: Book):
+        """Returns book to Library
+        
+        Keyword arguments:
+            book(Book) -- Book(Obj)
+
+        Return: r
+            return True if books is successfully returned and False if otherwise. Will also return False if an unexpected error occurs.
+        """
+        
         try:
             borrowed_book_database = self.borrowed_books_db.borrowed_books_data
             book_id = book.get_book_id()
@@ -132,6 +161,8 @@ class Library():
         Keyword arguments:
             user (User) -- user (obj)
         
+        Return:
+            returns if user delete from database and false if user not on database
         """
         
         database = self.user_db.user_database_info # storing dict database
@@ -150,6 +181,8 @@ class Library():
         Keyword arguments:
             user (User) -- User(obj)
         
+        Returns:
+            returns True if user is added to database
         """
         try:
             database = self.user_db.user_database_info # Storing dict database

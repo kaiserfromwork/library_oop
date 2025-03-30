@@ -11,10 +11,6 @@ class UserDatabase():
         self.user_database_info = self.load_user_database()  # storing contents of JSON file
 
     
-    def __str__(self):
-        return str(self.user_database_info)
-
-
     def load_user_database(self):
         """Retrieves information from user database.
         
@@ -33,11 +29,11 @@ class UserDatabase():
             return {}  
         
         except json.JSONDecodeError as error:
-            raise print(f"Error decoding json in {FILENAME}: {error}")
-        
+            print(f"Error decoding json in {FILENAME}: {error}")
+            raise
         except Exception as error:
-            raise print(f"Error while loading database: {FILENAME}: {error}")
-            
+            print(f"Error while loading database: {FILENAME}: {error}")
+            raise
 
         
     def update_user_database(self, user_database):

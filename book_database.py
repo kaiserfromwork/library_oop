@@ -20,13 +20,22 @@ class BookDatabase:
             return {}  
         
         except json.JSONDecodeError as error:
-            raise print(f"Error decoding json in {FILENAME}: {error}")
-        
+            print(f"Error decoding json in {FILENAME}: {error}")
+            raise
+
         except Exception as error:
-            raise print(f"Error while loading database: {FILENAME}: {error}")
-        
+            print(f"Error while loading database: {FILENAME}: {error}")
+            raise
 
     def update_book_database(self, book_database):
+        """Updates json file (FILENAME) database.
+        
+        Keyword arguments:
+            database(dict) -- dict used to updated json file database.
+       
+         Return: 
+            returns true if file is updated and raises an error otherwise. 
+        """
         try:
             with open(FILENAME, "w") as file:
                 json.dump(book_database, file, indent=4)
