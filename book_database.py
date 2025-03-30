@@ -16,7 +16,8 @@ class BookDatabase:
                 return json.load(file)
             
         except (FileNotFoundError, json.JSONDecodeError) as error:
-            raise (f"Error while reading {FILENAME}: {error}")
+            return {}
+            # raise (f"Error while reading {FILENAME}: {error}")
         
 
     def update_book_database(self, book_database):

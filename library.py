@@ -97,8 +97,8 @@ class Library():
             borrowed_book_database.pop(book_id)
             # Updating database (JSON file)
             self.books_db.update_borrowed_books(borrowed_book_database)
-            # Updating in-memory database
-            self.books_db.create_user_book_index(borrowed_book_database)
+            # # Updating in-memory database
+            # self.books_db.create_user_book_index(borrowed_book_database)
             return True
         else:
            return False

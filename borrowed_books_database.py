@@ -18,7 +18,8 @@ class BorrowedBooksDatabase:
                 return json.load(file)
 
         except (FileNotFoundError, json.JSONDecodeError) as error:
-            raise (f"Error while reading {FILENAME}: {error}")
+            return {}
+            # raise (f"Error while reading {FILENAME}: {error}")
 
 
 
