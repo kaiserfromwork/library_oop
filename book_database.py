@@ -15,9 +15,15 @@ class BookDatabase:
             with open(FILENAME, "r") as file:
                 return json.load(file)
             
-        except (FileNotFoundError, json.JSONDecodeError) as error:
-            print(f"Error while reading {FILENAME}: {error}")
-            return {}
+        except FileExistsError:
+            print(f"Database file: {FILENAME} not found. Initializing an empty database.")
+            return {}  
+        
+        except json.JSONDecodeError as error:
+            raise print(f"Error decoding json in {FILENAME}: {error}")
+        
+        except Exception as error:
+            raise print(f"Error while loading database: {FILENAME}: {error}")
         
 
     def update_book_database(self, book_database):
