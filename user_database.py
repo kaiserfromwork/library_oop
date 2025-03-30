@@ -28,7 +28,7 @@ class UserDatabase():
             with open(FILENAME, "r") as file:
                 return json.load(file)
 
-        except FileExistsError:
+        except FileNotFoundError:
             print(f"Database file: {FILENAME} not found. Initializing an empty database.")
             return {}  
         

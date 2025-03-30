@@ -93,7 +93,8 @@ class Library():
                 return False
             else:
                 borrowed_book_database[book_id] = {"user_id":  user.get_user_id(), "date": str(datetime.now().date())}  
-          
+
+                self.borrowed_books_db.update_borrowed_books(borrowed_book_database)
                 # Updating in-memory database
                 self.borrowed_books_db.create_user_book_index()
                 return True
@@ -111,6 +112,7 @@ class Library():
             if book_id in borrowed_book_database:
                 borrowed_book_database.pop(book_id)
                 
+                self.borrowed_books_db.update_borrowed_books(borrowed_book_database)
                 # Updating in-memory database
                 self.borrowed_books_db.create_user_book_index()
                 return True
