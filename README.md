@@ -1,9 +1,3 @@
-########################################## IMPLEMENTING/LAST WORKING ON ##########################################
-
+This is a simplified library management system built as a practical exercise in object-oriented programming (OOP) and JSON file manipulation. It features User and Book classes, and a Library class that simulates database interactions using JSON files. The project's primary goal was to solidify understanding of OOP principles and file I/O with JSON. I was able to implement aspects Dependency Injection, Inheritance, Polymorphism, Encapsulation.
 
 ##################### Challenges Faced and Solutions I found during the Project #####################
-- Storing the data in a database.json file:
-    - (writing and reading to JSON file using a list is a lot easier to manipulate and deal with of the data)
-- having functions that read, write and update database in inside database class and having library class storing, appending, updating user information to a list and using it to update database***** might change this******
-- using a function (getter) to get value of protected variable/attribute
-- Planning functions, methods, dsa
