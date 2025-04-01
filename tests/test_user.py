@@ -1,6 +1,6 @@
 def test_user_creation(sample_user):
-    assert sample_user.name == "Gojo"
-    assert sample_user.surname == "Saturo"
+    assert sample_user.name == "John"
+    assert sample_user.surname == "Doe"
 
 
 def test_get_user_id(sample_user):
@@ -11,8 +11,8 @@ def test_get_user_id(sample_user):
 
 def test_display_user(sample_user):
     display = sample_user.display_user()
-    assert "Gojo" in display
-    assert "Saturo" in display
+    assert "John" in display
+    assert "Doe" in display
 
 
 def test_student_user(student_user):
@@ -26,4 +26,3 @@ def test_staff_user(staff_user):
     display = staff_user.display_staff()
     assert "Director" in display
 
-    

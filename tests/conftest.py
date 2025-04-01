@@ -17,13 +17,13 @@ def non_fiction_book():
 
 @pytest.fixture
 def sample_user():
-    return User("Gojo", "Saturo")
+    return User("John", "Doe")
 
 
 @pytest.fixture
 def student_user():
-    return StudentUser("Nobara", "Kugisaki", "Computer Science")
+    return StudentUser("Jane", "Doe", "Computer Science")
 
 @pytest.fixture
 def staff_user():
-    return StaffUser("Masamichi", "Yaga", "Director")
+    return StaffUser("Peter", "Park", "Director")
